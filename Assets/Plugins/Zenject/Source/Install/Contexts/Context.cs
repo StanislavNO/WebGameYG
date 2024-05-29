@@ -242,6 +242,7 @@ namespace Zenject
             // then we could avoid calling the slow Resources.FindObjectsOfTypeAll here
             foreach (var binding in Resources.FindObjectsOfTypeAll<ZenjectBinding>())
             {
+                Debug.Log("sdf");
                 if (binding == null)
                 {
                     continue;
