@@ -8,7 +8,7 @@ namespace Assets.Source.Code_base
 {
     public class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private Player _player;
+        [SerializeField] private Character _player;
 
         private PlayerInput _input;
         private IInstantiator _container;
