@@ -6,11 +6,13 @@ namespace Assets.Source.Code_base
     public class Character : MonoBehaviour
     {
         private CharacterStateMachine _stateMachine;
+        private CharacterData _data;
 
         public void Initialize(PlayerInput input)
         {
             Input = input;
-            _stateMachine = new();
+            _data = new();
+            _stateMachine = new(this , _data);
         }
 
         [field: SerializeField]

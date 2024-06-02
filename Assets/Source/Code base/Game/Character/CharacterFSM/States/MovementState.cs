@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Source.Code_base
 {
-    public class MovementState : ICharacterState
+    public abstract class MovementState : ICharacterState
     {
         protected readonly IStateSwitcher StateSwitcher;
         protected readonly CharacterData Data;
 
         private readonly Character _character;
+        private float _currentSpeed = 0;
 
         public MovementState(IStateSwitcher stateSwitcher, Character character, CharacterData data)
         {
@@ -21,29 +20,46 @@ namespace Assets.Source.Code_base
         protected PlayerInput Input => _character.Input;
         protected CharacterController Controller => _character.Controller;
 
-        public void Enter()
+        public virtual void Update()
+        {
+            MovePlayer();
+            RotationPlayer();
+        }
+
+        public virtual void Enter()
         {
             Debug.Log(GetType());
         }
 
-        public void Exit() { }
+        public virtual void Exit() { }
 
         public void HandleInput()
         {
-            Data.DeltaInput = ReadInput();
+            Data.SetDirection(ReadInput());
         }
 
-        public void Update()
+        protected bool IsInputZero() => 
+            ReadInput() == Vector2.zero;
+
+        private void MovePlayer()
         {
-            throw new System.NotImplementedException();
+            float lerpAmount = 1f;
+
+            _currentSpeed = Mathf.MoveTowards(_currentSpeed, Data.Speed, lerpAmount);
+            Controller.Move(Data.Direction * _currentSpeed * Time.deltaTime);
         }
 
-        private Vector3 ReadInput()
+        private void RotationPlayer()
         {
-            Vector2 delta = Input.Player.Move.ReadValue<Vector2>();
-            Vector3 worldPosition = new(delta.x, 0, delta.y);
+            float lerpAmount = 0.05f;
+            Vector3 direction = Data.Direction;
+            direction.y = 0f;
 
-            return worldPosition;
+            _character.transform.forward = 
+                Vector3.Slerp(_character.transform.forward, direction, lerpAmount);
         }
+
+        private Vector2 ReadInput() =>
+            Input.Player.Move.ReadValue<Vector2>();
     }
 }

@@ -8,11 +8,12 @@ namespace Assets.Source.Code_base
         private List<ICharacterState> _states;
         private ICharacterState _currentState;
 
-        public CharacterStateMachine()
+        public CharacterStateMachine(Character character, CharacterData data)
         {
             _states = new List<ICharacterState>()
             {
-
+                new IdleState(this, character, data),
+                new RunningState(this, character, data)
             };
 
             _currentState = _states[0];
