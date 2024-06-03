@@ -8,6 +8,8 @@ namespace Assets.Source.Code_base
         protected readonly CharacterData Data;
 
         private readonly Character _character;
+        private readonly Transform _characterTransform;
+
         private float _currentSpeed = 0;
 
         public MovementState(IStateSwitcher stateSwitcher, Character character, CharacterData data)
@@ -15,6 +17,8 @@ namespace Assets.Source.Code_base
             StateSwitcher = stateSwitcher;
             _character = character;
             Data = data;
+
+            _characterTransform = _character.transform;
         }
 
         protected PlayerInput Input => _character.Input;
@@ -55,7 +59,7 @@ namespace Assets.Source.Code_base
             Vector3 direction = Data.Direction;
             direction.y = 0f;
 
-            _character.transform.forward = 
+            _characterTransform.forward = 
                 Vector3.Slerp(_character.transform.forward, direction, lerpAmount);
         }
 
