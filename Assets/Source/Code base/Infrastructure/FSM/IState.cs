@@ -7,5 +7,6 @@ namespace Assets.Source.Code_base
     {
         void Enter();
         void Exit();
+        void Update();
     }
 }

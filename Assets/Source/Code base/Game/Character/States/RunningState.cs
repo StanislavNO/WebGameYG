@@ -2,11 +2,11 @@
 {
     public class RunningState : MovementState
     {
-        private readonly RunningStateConfig _config;
+        private readonly MoveStateConfig _config;
 
         public RunningState(IStateSwitcher stateSwitcher, Character character, CharacterData data) : base(stateSwitcher, character, data)
         {
-            _config = character.Config.RunningStateConfig;
+            _config = character.Config.MoveStateConfig;
         }
 
         public override void Enter()

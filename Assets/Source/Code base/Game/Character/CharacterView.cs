@@ -9,7 +9,6 @@ namespace Assets.Source.Code_base
         private const string IsIdling = "IsIdling";
         private const string IsRunning = "IsRunning";
         private const string IsAttacking = "IsAttacking";
-        //private const string = "";
 
         [SerializeField] private Animator _animator;
 
