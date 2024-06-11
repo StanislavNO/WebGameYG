@@ -3,18 +3,21 @@ using UnityEngine;
 
 namespace Assets.Source.Code_base
 {
-    public class DieState : IState
+    public class DieState : EnemyState
     {
-        public void Enter()
+        private readonly EnemyView _view;
+
+        public DieState(IStateSwitcher switcher, EnemyView view) : base(switcher, view)
         {
+            _view = view;
         }
 
-        public void Exit()
+        public override void Enter()
         {
-        }
+            base.Enter();
 
-        public void Update()
-        {
+            _view.StartDie();
+            Switcher.SwitchState<DisableState>();
         }
     }
 }

@@ -2,7 +2,8 @@
 
 namespace Assets.Source.Code_base
 {
-    public class Enemy : MonoBehaviour, IPositionInWorld
+    [RequireComponent(typeof(Collider))]
+    public class Enemy : MonoBehaviour, ICoroutineRunner
     {
         [SerializeField] private EnemyView _view;
         [SerializeField] EnemyConfig _config;
@@ -13,10 +14,8 @@ namespace Assets.Source.Code_base
         public void Initialize(Vector3 target)
         {
             _data = new(target);
-            _stateMachine = new(_data, transform, _view, _config);
+            _stateMachine = new(_data, transform, _view, _config, this);
         }
-
-        public Vector3 Position => transform.position;
 
         private void OnEnable()
         {
@@ -25,5 +24,11 @@ namespace Assets.Source.Code_base
         }
 
         private void Update() => _stateMachine.Update();
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (TryGetComponent<AttackPoint>(out _))
+                _stateMachine.SwitchState<DieState>();
+        }
     }
 }

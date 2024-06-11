@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c379807890dd1049902c8a683b70400, type: 3}
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
-  <RunningStateConfig>k__BackingField:
-    <Speed>k__BackingField: 3.5
+  <MoveStateConfig>k__BackingField:
+    <Speed>k__BackingField: 3.2
   <AttackStateConfig>k__BackingField:
     <CoolDown>k__BackingField: 0.57

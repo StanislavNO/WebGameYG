@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8120a6b98d21c469bd850d398c6fc2, type: 3}
   m_Name: EnemyConfigs
   m_EditorClassIdentifier: 
+  <MoveStateConfig>k__BackingField:
+    <Speed>k__BackingField: 2.22
+  <OffsetToTarget>k__BackingField: 2.19
+  <WorkCoolDown>k__BackingField: 1.05

@@ -9,22 +9,26 @@ namespace Assets.Source.Code_base
 
         public void Starting()
         {
-            throw new NotImplementedException();
-        }
-
-        public void StartMoving()
-        {
-            throw new NotImplementedException();
         }
 
         public void Stopping()
         {
-            throw new NotImplementedException();
+        }
+
+        public void StartMoving()
+        {
         }
 
         public void StopMoving()
         {
-            throw new NotImplementedException();
+        }
+
+        public void StartWork()
+        {
+        }
+
+        public void StartDie()
+        {
         }
     }
 }

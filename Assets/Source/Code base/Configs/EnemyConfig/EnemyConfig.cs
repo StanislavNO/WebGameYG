@@ -7,5 +7,6 @@ namespace Assets.Source.Code_base
     {
         [field: SerializeField] public MoveStateConfig MoveStateConfig { get; private set; }
         [field: SerializeField] public float OffsetToTarget { get; private set; }
+        [field: SerializeField] public float WorkCoolDown { get; private set; }
     }
 }

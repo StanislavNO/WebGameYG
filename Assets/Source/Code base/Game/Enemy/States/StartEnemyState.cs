@@ -19,6 +19,7 @@ namespace Assets.Source.Code_base
 
             _enemyData.StartPosition = _enemy.position;
             View.Starting();
+            Switcher.SwitchState<MoveState>();
         }
 
         public override void Exit()
@@ -26,13 +27,6 @@ namespace Assets.Source.Code_base
             base.Exit();
 
             View.Stopping();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-
-            Switcher.SwitchState<MoveState>();
         }
     }
 }

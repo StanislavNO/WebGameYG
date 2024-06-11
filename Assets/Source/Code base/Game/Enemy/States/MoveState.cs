@@ -39,6 +39,7 @@ namespace Assets.Source.Code_base
             base.Update();
 
             MoveToTarget();
+            RotationToTarget();
 
             if (TryTouchToTarget())
             {
@@ -66,7 +67,15 @@ namespace Assets.Source.Code_base
                 _currentTarget,
                 _step * Time.deltaTime);
 
+            position.y = _transform.position.y;
             _transform.position = position;
+        }
+
+        private void RotationToTarget()
+        {
+            Vector3 direction = _currentTarget - _transform.position;
+
+            _transform.LookAt(direction);
         }
 
         private void SetCurrentTarget()

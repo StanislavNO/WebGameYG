@@ -9,6 +9,9 @@ namespace Assets.Source.Code_base
     public class Bootstrap : MonoBehaviour
     {
         [SerializeField] private Character _player;
+        [SerializeField] private Enemy _enemy;
+
+        [SerializeField] Transform _enemyTarget;
 
         private PlayerInput _input;
         private IInstantiator _container;
@@ -18,6 +21,7 @@ namespace Assets.Source.Code_base
             _input = new();
             _input.Enable();
             _player.Initialize(_input);
+            _enemy.Initialize(_enemyTarget.position);
         }
 
         private void OnDestroy()

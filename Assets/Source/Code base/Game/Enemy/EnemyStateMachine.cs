@@ -9,14 +9,15 @@ namespace Assets.Source.Code_base
         private List<IState> _states;
         private IState _currentState;
 
-        public EnemyStateMachine(EnemyData data, Transform enemy, EnemyView enemyView, EnemyConfig config)
+        public EnemyStateMachine(EnemyData data, Transform enemy, EnemyView enemyView, EnemyConfig config, ICoroutineRunner coroutineRunner)
         {
             _states = new List<IState>()
             {
                 new StartEnemyState(this, data, enemy, enemyView),
                 new MoveState(this,enemyView,data,enemy,config),
-                new WorkState(this, enemyView, data),
-                new DieState()
+                new WorkState(this, enemyView, data, coroutineRunner,config),
+                new DieState(this, enemyView),
+                new DisableState()
             };
 
             _currentState = _states[0];

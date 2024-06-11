@@ -3,9 +3,17 @@ using UnityEngine;
 
 namespace Assets.Source.Code_base
 {
-    public class DisableState : EnemyState
+    public class DisableState : IState
     {
-        public DisableState(IStateSwitcher switcher, EnemyView view) : base(switcher, view)
+        public void Enter()
+        {
+        }
+
+        public void Exit()
+        {
+        }
+
+        public void Update()
         {
         }
     }
