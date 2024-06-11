@@ -23,6 +23,7 @@ namespace Assets.Source.Code_base
 
         protected PlayerInput Input => _character.Input;
         protected CharacterController Controller => _character.Controller;
+        protected CharacterView View => _character.View;
 
         public virtual void Update()
         {
@@ -50,14 +51,14 @@ namespace Assets.Source.Code_base
             float lerpAmount = 1f;
 
             _currentSpeed = Mathf.MoveTowards(_currentSpeed, Data.Speed, lerpAmount);
-            Controller.Move(Data.Direction * _currentSpeed * Time.deltaTime);
+            Controller.Move(_currentSpeed * Time.deltaTime * Data.Direction);
         }
 
         private void RotationPlayer()
         {
             float lerpAmount = 0.05f;
             Vector3 direction = Data.Direction;
-            direction.y = 0f;
+            direction.y = 0;
 
             _characterTransform.forward = 
                 Vector3.Slerp(_character.transform.forward, direction, lerpAmount);

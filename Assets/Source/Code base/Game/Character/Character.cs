@@ -12,11 +12,13 @@ namespace Assets.Source.Code_base
         {
             Input = input;
             _data = new();
-            _stateMachine = new(this , _data);
+            _stateMachine = new(this, _data);
         }
 
-        [field: SerializeField]
-        public CharacterController Controller { get; private set; }
+        [field: SerializeField] public CharacterView View { get; private set; }
+        [field: SerializeField] public CharacterController Controller { get; private set; }
+        [field: SerializeField] public CharacterConfig Config { get; private set; }
+
         public PlayerInput Input { get; private set; }
 
         private void Update()
