@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Assets.Source.Code_base
 {
@@ -31,20 +32,23 @@ namespace Assets.Source.Code_base
             RotationPlayer();
         }
 
-        public virtual void Enter()
-        {
-            Debug.Log(GetType());
-        }
+        public virtual void Enter() =>
+            AddInputActionsCallbacks();
 
-        public virtual void Exit() { }
+        public virtual void Exit() =>
+            RemoveInputActionsCallbacks();
 
-        public void HandleInput()
-        {
+        public void HandleInput() =>
             Data.SetDirection(ReadInput());
-        }
 
-        protected bool IsInputZero() => 
+        protected bool IsInputZero() =>
             ReadInput() == Vector2.zero;
+
+        protected virtual void AddInputActionsCallbacks() =>
+            Input.Player.Attack.started += OnAttackPressed;
+
+        protected virtual void RemoveInputActionsCallbacks() =>
+            Input.Player.Attack.started -= OnAttackPressed;
 
         private void MovePlayer()
         {
@@ -60,11 +64,14 @@ namespace Assets.Source.Code_base
             Vector3 direction = Data.Direction;
             direction.y = 0;
 
-            _characterTransform.forward = 
+            _characterTransform.forward =
                 Vector3.Slerp(_character.transform.forward, direction, lerpAmount);
         }
 
         private Vector2 ReadInput() =>
             Input.Player.Move.ReadValue<Vector2>();
+
+        private void OnAttackPressed(InputAction.CallbackContext _) =>
+            StateSwitcher.SwitchState<AttackState>();
     }
 }

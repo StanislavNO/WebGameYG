@@ -3,7 +3,7 @@
 namespace Assets.Source.Code_base
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Character : MonoBehaviour
+    public class Character : MonoBehaviour, ICoroutineRunner
     {
         private CharacterStateMachine _stateMachine;
         private CharacterData _data;
@@ -18,6 +18,7 @@ namespace Assets.Source.Code_base
         [field: SerializeField] public CharacterView View { get; private set; }
         [field: SerializeField] public CharacterController Controller { get; private set; }
         [field: SerializeField] public CharacterConfig Config { get; private set; }
+        [field: SerializeField] public AttackPoint AttackPoint { get; private set; }
 
         public PlayerInput Input { get; private set; }
 

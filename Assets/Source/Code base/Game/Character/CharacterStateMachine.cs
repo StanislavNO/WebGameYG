@@ -13,7 +13,8 @@ namespace Assets.Source.Code_base
             _states = new List<ICharacterState>()
             {
                 new IdleState(this, character, data),
-                new RunningState(this, character, data)
+                new RunningState(this, character, data),
+                new AttackState(this, character)
             };
 
             _currentState = _states[0];
