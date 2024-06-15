@@ -5,7 +5,7 @@ namespace Assets.Source.Code_base
     public class MoveState : EnemyState
     {
         private readonly EnemyData _enemyData;
-        private readonly float _step;
+        private readonly float _speed;
         private readonly float _offsetToTarget;
 
         private Transform _transform;
@@ -15,7 +15,7 @@ namespace Assets.Source.Code_base
         {
             _enemyData = enemyData;
             _transform = enemyTransform;
-            _step = config.MoveStateConfig.Speed;
+            _speed = config.MoveStateConfig.Speed;
             _offsetToTarget = config.OffsetToTarget;
         }
 
@@ -45,8 +45,8 @@ namespace Assets.Source.Code_base
             {
                 if (_enemyData.IsMovingToWork)
                     Switcher.SwitchState<WorkState>();
-
-                Switcher.SwitchState<DisableState>();
+                else
+                    Switcher.SwitchState<DisableState>();
             }
         }
 
@@ -65,7 +65,7 @@ namespace Assets.Source.Code_base
             Vector3 position = Vector3.MoveTowards(
                 _transform.position,
                 _currentTarget,
-                _step * Time.deltaTime);
+                _speed * Time.deltaTime);
 
             position.y = _transform.position.y;
             _transform.position = position;
@@ -73,9 +73,9 @@ namespace Assets.Source.Code_base
 
         private void RotationToTarget()
         {
-            Vector3 direction = _currentTarget - _transform.position;
+            Vector3 target = new(_currentTarget.x, _transform.position.y , _currentTarget.z);
 
-            _transform.LookAt(direction);
+            _transform.LookAt(target);
         }
 
         private void SetCurrentTarget()

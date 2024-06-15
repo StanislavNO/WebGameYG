@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Source.Code_base
 {
-    [RequireComponent(typeof(Collider))]
-    public class Enemy : MonoBehaviour, ICoroutineRunner
+    [RequireComponent(typeof(EnemyDeathHandler))]
+    public class Enemy : MonoBehaviour, ICoroutineRunner, IDisable
     {
         [SerializeField] private EnemyView _view;
-        [SerializeField] EnemyConfig _config;
+        [SerializeField] private EnemyConfig _config;
+        [SerializeField] private EnemyDeathHandler _deathHandler;
 
         private EnemyData _data;
         private EnemyStateMachine _stateMachine;
@@ -14,21 +16,42 @@ namespace Assets.Source.Code_base
         public void Initialize(Vector3 target)
         {
             _data = new(target);
-            _stateMachine = new(_data, transform, _view, _config, this);
+            _stateMachine = new(_data, transform, _view, _config, this, this);
         }
+
+        public event Action<Enemy> Deactivated;
 
         private void OnEnable()
         {
             if (_stateMachine != null)
                 _stateMachine.Reset();
+
+            _deathHandler.DamageDetected += OnDie;
+        }
+
+        private void OnDisable()
+        {
+            _deathHandler.DamageDetected -= OnDie;
         }
 
         private void Update() => _stateMachine.Update();
 
-        private void OnTriggerEnter(Collider other)
+        public void Disable()
         {
-            if (TryGetComponent<AttackPoint>(out _))
-                _stateMachine.SwitchState<DieState>();
+            Deactivated?.Invoke(this);
+            Debug.Log("Disable");
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            transform.position = position;
+        }
+
+        private void OnDie()
+        {
+            _stateMachine.SwitchState<DieState>();
+            Deactivated?.Invoke(this);
+            Debug.Log("Die");
         }
     }
 }

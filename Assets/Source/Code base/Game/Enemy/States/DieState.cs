@@ -17,6 +17,7 @@ namespace Assets.Source.Code_base
             base.Enter();
 
             _view.StartDie();
+
             Switcher.SwitchState<DisableState>();
         }
     }

@@ -9,30 +9,24 @@ namespace Assets.Source.Code_base
         private List<IState> _states;
         private IState _currentState;
 
-        public EnemyStateMachine(EnemyData data, Transform enemy, EnemyView enemyView, EnemyConfig config, ICoroutineRunner coroutineRunner)
+        public EnemyStateMachine(EnemyData data, Transform enemyTransform, EnemyView enemyView, EnemyConfig config, ICoroutineRunner coroutineRunner, IDisable enemy)
         {
             _states = new List<IState>()
             {
-                new StartEnemyState(this, data, enemy, enemyView),
-                new MoveState(this,enemyView,data,enemy,config),
+                new StartEnemyState(this, data, enemyTransform, enemyView),
+                new MoveState(this,enemyView,data,enemyTransform,config),
                 new WorkState(this, enemyView, data, coroutineRunner,config),
                 new DieState(this, enemyView),
-                new DisableState()
+                new DisableState(enemy)
             };
 
             _currentState = _states[0];
             _currentState.Enter();
         }
 
-        public void Update()
-        {
-            _currentState.Update();
-        }
+        public void Update() => _currentState.Update();
 
-        public void Reset()
-        {
-            SwitchState<StartEnemyState>();
-        }
+        public void Reset() => SwitchState<StartEnemyState>();
 
         public void SwitchState<T>() where T : IState
         {
