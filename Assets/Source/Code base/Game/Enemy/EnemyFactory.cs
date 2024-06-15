@@ -16,7 +16,7 @@ namespace Assets.Source.Code_base
 
         public Enemy Create()
         {
-            Enemy enemy = Object.Instantiate(_prefab);
+            Enemy enemy = GameObject.Instantiate(_prefab);
             enemy.Initialize(_enemyTarget);
             return _prefab;
         }

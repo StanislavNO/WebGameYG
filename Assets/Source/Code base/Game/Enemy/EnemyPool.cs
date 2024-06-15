@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 
@@ -22,8 +23,9 @@ namespace Assets.Source.Code_base
 
             if (_enemies.Count == 0)
             {
+                UnityEngine.Debug.Log("Create");
                 enemy = _factory.Create();
-                enemy.Deactivated += PutEnemy;
+                enemy.Deactivated.AddListener(PutEnemy);
 
                 return enemy;
             }

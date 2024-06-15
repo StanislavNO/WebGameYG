@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.Source.Code_base
 {
@@ -19,7 +20,7 @@ namespace Assets.Source.Code_base
             _stateMachine = new(_data, transform, _view, _config, this, this);
         }
 
-        public event Action<Enemy> Deactivated;
+        public UnityEvent<Enemy> Deactivated;
 
         private void OnEnable()
         {
@@ -34,7 +35,10 @@ namespace Assets.Source.Code_base
             _deathHandler.DamageDetected -= OnDie;
         }
 
-        private void Update() => _stateMachine.Update();
+        private void Update()
+        {
+            _stateMachine.Update();
+        }
 
         public void Disable()
         {
