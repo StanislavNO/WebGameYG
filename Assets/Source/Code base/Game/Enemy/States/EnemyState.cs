@@ -16,7 +16,6 @@ namespace Assets.Source.Code_base
 
         public virtual void Enter()
         {
-            //Debug.Log(this);
         }
 
         public virtual void Exit()

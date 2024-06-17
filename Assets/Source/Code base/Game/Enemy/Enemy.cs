@@ -1,11 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Assets.Source.Code_base
 {
     [RequireComponent(typeof(EnemyDeathHandler))]
-    public class Enemy : MonoBehaviour, ICoroutineRunner, IDisable
+    public class Enemy : MonoBehaviour, IEnemy, ICoroutineRunner, IDisable
     {
         [SerializeField] private EnemyView _view;
         [SerializeField] private EnemyConfig _config;
@@ -13,14 +12,14 @@ namespace Assets.Source.Code_base
 
         private EnemyData _data;
         private EnemyStateMachine _stateMachine;
+        private EnemyDeactivator _deactivator;
 
-        public void Initialize(Vector3 target)
+        public void Initialize(Vector3 target, EnemyDeactivator deactivator)
         {
+            _deactivator = deactivator;
             _data = new(target);
             _stateMachine = new(_data, transform, _view, _config, this, this);
         }
-
-        public UnityEvent<Enemy> Deactivated;
 
         private void OnEnable()
         {
@@ -30,31 +29,25 @@ namespace Assets.Source.Code_base
             _deathHandler.DamageDetected += OnDie;
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _deathHandler.DamageDetected -= OnDie;
-        }
 
-        private void Update()
-        {
+        private void Update() =>
             _stateMachine.Update();
-        }
 
         public void Disable()
         {
-            Deactivated?.Invoke(this);
+            _deactivator.Deactivate(this);
             Debug.Log("Disable");
         }
 
-        public void SetPosition(Vector3 position)
-        {
+        public void SetPosition(Vector3 position) =>
             transform.position = position;
-        }
 
         private void OnDie()
         {
             _stateMachine.SwitchState<DieState>();
-            Deactivated?.Invoke(this);
+            _deactivator.Deactivate(this);
             Debug.Log("Die");
         }
     }

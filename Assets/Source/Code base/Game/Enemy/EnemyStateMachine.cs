@@ -13,11 +13,12 @@ namespace Assets.Source.Code_base
         {
             _states = new List<IState>()
             {
-                new StartEnemyState(this, data, enemyTransform, enemyView),
+                new StartState(this, data, enemyTransform, enemyView),
                 new MoveState(this,enemyView,data,enemyTransform,config),
                 new WorkState(this, enemyView, data, coroutineRunner,config),
                 new DieState(this, enemyView),
-                new DisableState(enemy)
+                new DisableState(enemy,this),
+                new InPoolState()
             };
 
             _currentState = _states[0];
@@ -26,7 +27,7 @@ namespace Assets.Source.Code_base
 
         public void Update() => _currentState.Update();
 
-        public void Reset() => SwitchState<StartEnemyState>();
+        public void Reset() => SwitchState<StartState>();
 
         public void SwitchState<T>() where T : IState
         {

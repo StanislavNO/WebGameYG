@@ -2,12 +2,12 @@
 
 namespace Assets.Source.Code_base
 {
-    public class StartEnemyState : EnemyState
+    public class StartState : EnemyState
     {
         private readonly EnemyData _enemyData;
         private readonly Transform _enemy;
 
-        public StartEnemyState(IStateSwitcher switcher, EnemyData enemyData, Transform enemy, EnemyView enemyView) : base(switcher, enemyView)
+        public StartState(IStateSwitcher switcher, EnemyData enemyData, Transform enemy, EnemyView enemyView) : base(switcher, enemyView)
         {
             _enemyData = enemyData;
             _enemy = enemy;

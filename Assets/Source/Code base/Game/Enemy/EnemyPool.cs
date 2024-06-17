@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
-using Unity.VisualScripting;
-using UnityEngine.Events;
 
 namespace Assets.Source.Code_base
 {
     public class EnemyPool
     {
-        private EnemyFactory _factory;
-        private Queue<Enemy> _enemies;
+        private readonly EnemyFactory _factory;
+        private readonly Queue<IEnemy> _enemies;
+        private readonly EnemyDeactivator _deactivator;
 
-        public EnemyPool(EnemyFactory factory)
+        public EnemyPool(EnemyFactory factory, EnemyDeactivator deactivator)
         {
             _factory = factory;
-            _enemies = new Queue<Enemy>();
+            _enemies = new Queue<IEnemy>();
+            _deactivator = deactivator;
+
+            _deactivator.EnemyDeactivated += PutEnemy;
         }
 
-        public Enemy GetEnemy()
+        public IEnemy GetEnemy()
         {
             Enemy enemy;
 
@@ -25,7 +25,6 @@ namespace Assets.Source.Code_base
             {
                 UnityEngine.Debug.Log("Create");
                 enemy = _factory.Create();
-                enemy.Deactivated.AddListener(PutEnemy);
 
                 return enemy;
             }
@@ -33,10 +32,7 @@ namespace Assets.Source.Code_base
             return _enemies.Dequeue();
         }
 
-        private void PutEnemy(Enemy enemy)
-        {
+        private void PutEnemy(IEnemy enemy) =>
             _enemies.Enqueue(enemy);
-            enemy.gameObject.SetActive(false);
-        }
     }
 }

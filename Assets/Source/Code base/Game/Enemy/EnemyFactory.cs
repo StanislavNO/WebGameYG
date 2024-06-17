@@ -5,19 +5,21 @@ namespace Assets.Source.Code_base
 {
     public class EnemyFactory 
     {
-        private Enemy _prefab;
-        private Vector3 _enemyTarget;
+        private readonly Enemy _prefab;
+        private readonly Vector3 _enemyTarget;
+        private readonly EnemyDeactivator _enemyDeactivator;
 
-        public EnemyFactory(EnemyConfig config, Enemy prefab)
+        public EnemyFactory(EnemyConfig config, Enemy prefab , EnemyDeactivator deactivator)
         {
             _prefab = prefab;
             _enemyTarget = config.SpawnConfig.Center3D;
+            _enemyDeactivator = deactivator;
         }
 
         public Enemy Create()
         {
-            Enemy enemy = GameObject.Instantiate(_prefab);
-            enemy.Initialize(_enemyTarget);
+            Enemy enemy = Object.Instantiate(_prefab);
+            enemy.Initialize(_enemyTarget, _enemyDeactivator);
             return _prefab;
         }
     }

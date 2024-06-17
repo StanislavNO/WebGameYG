@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-
-namespace Assets.Source.Code_base
+﻿namespace Assets.Source.Code_base
 {
     public class DisableState : IState
     {
-        private IDisable _enemy;
+        private readonly IDisable _enemy;
+        private readonly IStateSwitcher _switcher;
 
-        public DisableState(IDisable enemy)
+        public DisableState(IDisable enemy, IStateSwitcher switcher)
         {
             _enemy = enemy;
+            _switcher = switcher;
         }
 
-        public void Enter() => _enemy.Disable();
+        public void Enter() => _switcher.SwitchState<InPoolState>();
 
-        public void Exit() { }
+        public void Exit() => _enemy.Disable();
 
         public void Update() { }
     }

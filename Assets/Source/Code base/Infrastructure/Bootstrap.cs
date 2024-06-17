@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
@@ -20,6 +17,7 @@ namespace Assets.Source.Code_base
 
         private EnemyPool _enemyPool;
         private EnemyFactory _enemyFactory;
+        private EnemyDeactivator _deactivator;
 
         private void Awake()
         {
@@ -27,9 +25,10 @@ namespace Assets.Source.Code_base
             _input.Enable();
             _player.Initialize(_input);
 
-            _enemyFactory = new(_enemyConfig,_enemy);
-            _enemyPool = new(_enemyFactory);
-            _enemySpawner.Initialize(_enemyPool,_enemyConfig);
+            _deactivator = new();
+            _enemyFactory = new(_enemyConfig, _enemy, _deactivator);
+            _enemyPool = new(_enemyFactory, _deactivator);
+            _enemySpawner.Initialize(_enemyPool, _enemyConfig);
         }
 
         private void OnDestroy()

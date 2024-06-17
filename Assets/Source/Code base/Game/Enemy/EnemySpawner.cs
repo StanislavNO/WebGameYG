@@ -29,7 +29,7 @@ namespace Assets.Source.Code_base
 
         private IEnumerator Spawn()
         {
-            Enemy enemy;
+            IEnemy enemy;
 
             while (enabled)
             {
@@ -37,6 +37,7 @@ namespace Assets.Source.Code_base
 
                 enemy = _pool.GetEnemy();
                 enemy.SetPosition(GetRandomPosition());
+                enemy.gameObject.SetActive(true);
             }
         }
 
