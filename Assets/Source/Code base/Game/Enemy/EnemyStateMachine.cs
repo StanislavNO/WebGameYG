@@ -27,10 +27,11 @@ namespace Assets.Source.Code_base
 
         public void Update() => _currentState.Update();
 
-        public void Reset() => SwitchState<StartState>();
+        public void Restart() => SwitchState<StartState>();
 
         public void SwitchState<T>() where T : IState
         {
+            Debug.Log($"switch {typeof(T)}");
             IState state = _states.FirstOrDefault(state => state is T);
 
             _currentState.Exit();

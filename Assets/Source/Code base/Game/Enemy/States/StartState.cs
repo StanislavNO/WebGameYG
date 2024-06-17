@@ -17,6 +17,7 @@ namespace Assets.Source.Code_base
         {
             base.Enter();
 
+            _enemyData.IsMovingToWork = true;
             _enemyData.StartPosition = _enemy.position;
             View.Starting();
             Switcher.SwitchState<MoveState>();

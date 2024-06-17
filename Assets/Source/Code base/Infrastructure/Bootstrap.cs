@@ -28,7 +28,7 @@ namespace Assets.Source.Code_base
             _deactivator = new();
             _enemyFactory = new(_enemyConfig, _enemy, _deactivator);
             _enemyPool = new(_enemyFactory, _deactivator);
-            _enemySpawner.Initialize(_enemyPool, _enemyConfig);
+            _enemySpawner.Initialize(_enemyPool, _enemyConfig, _input);
         }
 
         private void OnDestroy()

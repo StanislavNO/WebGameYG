@@ -23,14 +23,19 @@ namespace Assets.Source.Code_base
 
         private void OnEnable()
         {
+            Debug.Log("Enemy eneble");
+
             if (_stateMachine != null)
-                _stateMachine.Reset();
+                _stateMachine.Restart();
 
             _deathHandler.DamageDetected += OnDie;
         }
 
-        private void OnDisable() =>
+        private void OnDisable()
+        {
+            Debug.Log("Enemy ondisable");
             _deathHandler.DamageDetected -= OnDie;
+        }
 
         private void Update() =>
             _stateMachine.Update();
@@ -38,7 +43,7 @@ namespace Assets.Source.Code_base
         public void Disable()
         {
             _deactivator.Deactivate(this);
-            Debug.Log("Disable");
+            Debug.Log("enemy.Disable()");
         }
 
         public void SetPosition(Vector3 position) =>

@@ -7,10 +7,12 @@ namespace Assets.Source.Code_base
     {
         public void Enter()
         {
+            Debug.Log("Enter InPool");
         }
 
         public void Exit()
         {
+            Debug.Log("Exit InPool");
         }
 
         public void Update()
