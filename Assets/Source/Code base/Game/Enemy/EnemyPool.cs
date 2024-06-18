@@ -11,28 +11,24 @@ namespace Assets.Source.Code_base
         public EnemyPool(EnemyFactory factory, EnemyDeactivator deactivator)
         {
             _factory = factory;
-            _enemies = new Queue<IEnemy>();
+            _enemies = new();
             _deactivator = deactivator;
 
-            _deactivator.EnemyDeactivated += PutEnemy;
+            _deactivator.EnemyDeactivated += OnPutEnemy;
         }
 
         public IEnemy GetEnemy()
         {
-            Enemy enemy;
+            IEnemy enemy;
 
             if (_enemies.Count == 0)
-            {
-                UnityEngine.Debug.Log("Create");
                 enemy = _factory.Create();
+            else
+                enemy = _enemies.Dequeue();
 
-                return enemy;
-            }
-
-            return _enemies.Dequeue();
+            return enemy;
         }
 
-        private void PutEnemy(IEnemy enemy) =>
-            _enemies.Enqueue(enemy);
+        private void OnPutEnemy(IEnemy enemy) => _enemies.Enqueue(enemy);
     }
 }

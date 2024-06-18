@@ -5,12 +5,10 @@ namespace Assets.Source.Code_base
 {
     public class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private EnemyConfig _enemyConfig;
+        [SerializeField] private Enemy _prefab;
         [SerializeField] private Character _player;
-        [SerializeField] private Enemy _enemy;
+        [SerializeField] private EnemyConfig _enemyConfig;
         [SerializeField] private EnemySpawner _enemySpawner;
-
-        [SerializeField] Transform _enemyTarget;
 
         private PlayerInput _input;
         private IInstantiator _container;
@@ -21,19 +19,26 @@ namespace Assets.Source.Code_base
 
         private void Awake()
         {
-            _input = new();
-            _input.Enable();
-            _player.Initialize(_input);
+            CreateEntity();
+            InitEntity();
 
-            _deactivator = new();
-            _enemyFactory = new(_enemyConfig, _enemy, _deactivator);
-            _enemyPool = new(_enemyFactory, _deactivator);
-            _enemySpawner.Initialize(_enemyPool, _enemyConfig, _input);
+            _input.Enable();
         }
 
-        private void OnDestroy()
+        private void OnDestroy() => _input.Disable();
+
+        private void CreateEntity()
         {
-            _input.Disable();
+            _input = new();
+            _deactivator = new();
+            _enemyFactory = new(_enemyConfig, _prefab, _deactivator);
+            _enemyPool = new(_enemyFactory, _deactivator);
+        }
+
+        private void InitEntity()
+        {
+            _player.Initialize(_input);
+            _enemySpawner.Initialize(_enemyPool, _enemyConfig);
         }
     }
 }

@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Source.Code_base
 {
-    public class EnemyFactory 
+    public class EnemyFactory
     {
         private readonly Enemy _prefab;
         private readonly Vector3 _enemyTarget;
-        private readonly EnemyDeactivator _enemyDeactivator;
+        private readonly EnemyDeactivator _deactivator;
 
-        public EnemyFactory(EnemyConfig config, Enemy prefab , EnemyDeactivator deactivator)
+        public EnemyFactory(EnemyConfig config, Enemy prefab, EnemyDeactivator deactivator)
         {
             _prefab = prefab;
             _enemyTarget = config.SpawnConfig.Center3D;
-            _enemyDeactivator = deactivator;
+            _deactivator = deactivator;
         }
 
         public Enemy Create()
         {
             Enemy enemy = Object.Instantiate(_prefab);
-            enemy.Initialize(_enemyTarget, _enemyDeactivator);
+            enemy.Initialize(_enemyTarget, _deactivator);
             return _prefab;
         }
     }

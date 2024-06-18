@@ -15,4 +15,4 @@ MonoBehaviour:
   <MoveStateConfig>k__BackingField:
     <Speed>k__BackingField: 3.2
   <AttackStateConfig>k__BackingField:
-    <CoolDown>k__BackingField: 0.57
+    <CoolDown>k__BackingField: 0.18

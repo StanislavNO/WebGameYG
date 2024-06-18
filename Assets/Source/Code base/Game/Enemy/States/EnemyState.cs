@@ -1,7 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
-
-namespace Assets.Source.Code_base
+﻿namespace Assets.Source.Code_base
 {
     public abstract class EnemyState : IState
     {
@@ -14,17 +11,10 @@ namespace Assets.Source.Code_base
         protected IStateSwitcher Switcher { get; private set; }
         protected EnemyView View { get; private set; }
 
-        public virtual void Enter()
-        {
-            Debug.Log(this);   
-        }
+        public virtual void Enter() { }
 
-        public virtual void Exit()
-        {
-        }
+        public virtual void Exit() { }
 
-        public virtual void Update()
-        {
-        }
+        public virtual void Update() { }
     }
 }

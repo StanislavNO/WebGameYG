@@ -7,16 +7,16 @@ namespace Assets.Source.Code_base
         private readonly EnemyData _enemyData;
         private readonly float _speed;
         private readonly float _offsetToTarget;
+        private readonly Transform _transform;
 
-        private Transform _transform;
         private Vector3 _currentTarget;
 
         public MoveState(IStateSwitcher switcher, EnemyView view, EnemyData enemyData, Transform enemyTransform, EnemyConfig config) : base(switcher, view)
         {
             _enemyData = enemyData;
-            _transform = enemyTransform;
             _speed = config.MoveStateConfig.Speed;
             _offsetToTarget = config.OffsetToTarget;
+            _transform = enemyTransform;
         }
 
         public override void Enter()
