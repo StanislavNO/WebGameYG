@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Source.Code_base
 {
@@ -6,15 +7,11 @@ namespace Assets.Source.Code_base
     {
         private readonly EnemyFactory _factory;
         private readonly Queue<IEnemy> _enemies;
-        private readonly EnemyDeactivator _deactivator;
 
-        public EnemyPool(EnemyFactory factory, EnemyDeactivator deactivator)
+        public EnemyPool(EnemyFactory factory)
         {
             _factory = factory;
             _enemies = new();
-            _deactivator = deactivator;
-
-            _deactivator.EnemyDeactivated += OnPutEnemy;
         }
 
         public IEnemy GetEnemy()
@@ -22,7 +19,11 @@ namespace Assets.Source.Code_base
             IEnemy enemy;
 
             if (_enemies.Count == 0)
+            {
                 enemy = _factory.Create();
+                enemy.Deactivated += OnPutEnemy;
+                Debug.Log("Pool enemy.Create");
+            }
             else
                 enemy = _enemies.Dequeue();
 

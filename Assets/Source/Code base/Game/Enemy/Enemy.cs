@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Source.Code_base
 {
@@ -12,14 +13,14 @@ namespace Assets.Source.Code_base
 
         private EnemyData _data;
         private EnemyStateMachine _stateMachine;
-        private EnemyDeactivator _deactivator;
 
-        public void Initialize(Vector3 target, EnemyDeactivator deactivator)
+        public void Initialize(Vector3 target)
         {
-            _deactivator = deactivator;
             _data = new(target);
             _stateMachine = new(_data, transform, _view, _config, this, this);
         }
+
+        public event Action<Enemy> Deactivated; 
 
         private void OnEnable()
         {
@@ -34,7 +35,11 @@ namespace Assets.Source.Code_base
 
         private void Update() => _stateMachine.Update();
 
-        public void Disable() => _deactivator.Deactivate(this);
+        public void Disable()
+        {
+            Deactivated?.Invoke(this);
+            Debug.Log("Enemy Disable");
+        }
 
         public void SetPosition(Vector3 position) =>
             _transform.position = position;

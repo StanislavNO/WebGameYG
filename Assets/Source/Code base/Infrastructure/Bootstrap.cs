@@ -31,8 +31,8 @@ namespace Assets.Source.Code_base
         {
             _input = new();
             _deactivator = new();
-            _enemyFactory = new(_enemyConfig, _prefab, _deactivator);
-            _enemyPool = new(_enemyFactory, _deactivator);
+            _enemyFactory = new(_enemyConfig, _prefab);
+            _enemyPool = new(_enemyFactory);
         }
 
         private void InitEntity()
