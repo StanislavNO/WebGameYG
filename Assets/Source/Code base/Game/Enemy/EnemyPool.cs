@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Zenject;
+
 
 namespace Assets.Source.Code_base
 {
-    public class EnemyPool
+    public class EnemyPool : IDisposable
     {
         private readonly EnemyFactory _factory;
         private readonly Queue<IEnemy> _enemies;
@@ -15,6 +18,11 @@ namespace Assets.Source.Code_base
             _deactivator = deactivator;
 
             _deactivator.EnemyDeactivated += OnPutEnemy;
+        }
+
+        public void Dispose()
+        {
+            _deactivator.EnemyDeactivated -= OnPutEnemy;
         }
 
         public IEnemy GetEnemy()

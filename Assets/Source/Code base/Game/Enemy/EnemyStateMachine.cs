@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Source.Code_base
 {
-    public class EnemyStateMachine : IStateSwitcher
+    public class EnemyStateMachine : IStateSwitcher, ITickable
     {
         private readonly List<IState> _states;
 
@@ -25,7 +26,7 @@ namespace Assets.Source.Code_base
             _currentState.Enter();
         }
 
-        public void Update() => _currentState.Update();
+        public void Tick() => _currentState.Update();
 
         public void Reset() => SwitchState<StartState>();
 

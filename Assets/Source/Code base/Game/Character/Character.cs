@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Assets.Source.Code_base
 {
@@ -8,7 +9,8 @@ namespace Assets.Source.Code_base
         private CharacterStateMachine _stateMachine;
         private CharacterData _data;
 
-        public void Initialize(PlayerInput input)
+        [Inject]
+        private void Construct(PlayerInput input)
         {
             Input = input;
             _data = new();

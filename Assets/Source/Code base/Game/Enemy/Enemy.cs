@@ -32,8 +32,6 @@ namespace Assets.Source.Code_base
         private void OnDisable() =>
             _deathHandler.DamageDetected -= OnDie;
 
-        private void Update() => _stateMachine.Update();
-
         public void Disable() => _deactivator.Deactivate(this);
 
         public void SetPosition(Vector3 position) =>

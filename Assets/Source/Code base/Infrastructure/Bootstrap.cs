@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Assets.Source.Code_base
 {
-    public class Bootstrap : MonoBehaviour
+    public class Bootstrap : MonoBehaviour, ICoroutineRunner
     {
         [SerializeField] private Enemy _prefab;
         [SerializeField] private Character _player;
@@ -17,6 +17,12 @@ namespace Assets.Source.Code_base
         private EnemyFactory _enemyFactory;
         private EnemyDeactivator _deactivator;
 
+        [Inject]
+        private void Construct(PlayerInput input)
+        {
+            _input = input;
+        }
+
         private void Awake()
         {
             CreateEntity();
@@ -29,7 +35,6 @@ namespace Assets.Source.Code_base
 
         private void CreateEntity()
         {
-            _input = new();
             _deactivator = new();
             _enemyFactory = new(_enemyConfig, _prefab, _deactivator);
             _enemyPool = new(_enemyFactory, _deactivator);
@@ -37,7 +42,6 @@ namespace Assets.Source.Code_base
 
         private void InitEntity()
         {
-            _player.Initialize(_input);
             _enemySpawner.Initialize(_enemyPool, _enemyConfig);
         }
     }
