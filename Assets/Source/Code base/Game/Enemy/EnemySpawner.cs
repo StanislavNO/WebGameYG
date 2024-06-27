@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace Assets.Source.Code_base
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner 
     {
+        private ICoroutineRunner _coroutineRunner;
         private EnemyPool _pool;
 
         private WaitForSeconds _coolDown;
         private float _spawnRadius;
         private Vector2 _center;
+
+        [Inject]
+        private void Construct(ICoroutineRunner coroutineRunner)
+        {
+            _coroutineRunner = coroutineRunner;
+        }
 
         public void Initialize(EnemyPool pool, EnemyConfig config)
         {
@@ -22,16 +30,16 @@ namespace Assets.Source.Code_base
             _center = config.SpawnConfig.Center2D;
         }
 
-        private void Start()
+        public void Start()
         {
-            StartCoroutine(Spawn());
+            _coroutineRunner.StartCoroutine(Spawn());
         }
 
         private IEnumerator Spawn()
         {
             IEnemy enemy;
 
-            while (enabled)
+            while (true)
             {
                 yield return _coolDown;
 

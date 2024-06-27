@@ -6,21 +6,20 @@ namespace Assets.Source.Code_base
     public class Bootstrap : MonoBehaviour, ICoroutineRunner
     {
         [SerializeField] private Enemy _prefab;
-        [SerializeField] private Character _player;
         [SerializeField] private EnemyConfig _enemyConfig;
-        [SerializeField] private EnemySpawner _enemySpawner;
 
         private PlayerInput _input;
-        private IInstantiator _container;
 
+        private EnemySpawner _enemySpawner;
         private EnemyPool _enemyPool;
         private EnemyFactory _enemyFactory;
         private EnemyDeactivator _deactivator;
 
         [Inject]
-        private void Construct(PlayerInput input)
+        private void Construct(PlayerInput input, EnemySpawner enemySpawner)
         {
             _input = input;
+            _enemySpawner = enemySpawner;
         }
 
         private void Awake()
@@ -43,6 +42,7 @@ namespace Assets.Source.Code_base
         private void InitEntity()
         {
             _enemySpawner.Initialize(_enemyPool, _enemyConfig);
+            _enemySpawner.Start();
         }
     }
 }
