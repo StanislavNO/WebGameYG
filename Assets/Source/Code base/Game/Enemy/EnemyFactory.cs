@@ -1,25 +1,30 @@
-﻿using UnityEngine;
+﻿using Zenject;
 
 namespace Assets.Source.Code_base
 {
     public class EnemyFactory
     {
         private readonly Enemy _prefab;
-        private readonly Vector3 _enemyTarget;
-        private readonly EnemyDeactivator _deactivator;
+        private readonly DiContainer _container;
 
-        public EnemyFactory(EnemyConfig config, Enemy prefab, EnemyDeactivator deactivator)
+        [Inject]
+        public EnemyFactory(Enemy prefab, DiContainer container)
         {
             _prefab = prefab;
-            _enemyTarget = config.SpawnConfig.Center3D;
-            _deactivator = deactivator;
+            _container = container;
         }
 
-        public Enemy Create()
+        public Enemy Get()
         {
-            Enemy enemy = Object.Instantiate(_prefab);
-            enemy.Initialize(_enemyTarget, _deactivator);
-            return _prefab;
+            Enemy enemy = Create();
+            _container.BindInterfacesAndSelfTo<Enemy>().FromInstance(enemy);
+
+            return enemy;
+        }
+
+        private Enemy Create()
+        {
+            return _container.InstantiatePrefabForComponent<Enemy>(_prefab);
         }
     }
 }

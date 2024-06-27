@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Assets.Source.Code_base
 {
-    public class EnemyStateMachine : IStateSwitcher, ITickable
+    public class EnemyStateMachine : IStateSwitcher
     {
         private readonly List<IState> _states;
 
@@ -26,7 +26,7 @@ namespace Assets.Source.Code_base
             _currentState.Enter();
         }
 
-        public void Tick() => _currentState.Update();
+        public void Update() => _currentState.Update();
 
         public void Reset() => SwitchState<StartState>();
 

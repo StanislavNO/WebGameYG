@@ -9,7 +9,6 @@ namespace Assets.Source.Code_base
     {
         public override void InstallBindings()
         {
-            Container.Bind<ICoroutineRunner>().To<Bootstrap>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
         }
     }

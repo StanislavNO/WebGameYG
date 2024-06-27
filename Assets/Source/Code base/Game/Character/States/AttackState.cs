@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Source.Code_base
 {
@@ -9,8 +10,8 @@ namespace Assets.Source.Code_base
         private readonly AttackPoint _attackPoint;
         private readonly CharacterView _view;
 
-        private readonly ICoroutineRunner _coroutineRunner;
         private readonly WaitForSeconds _delay;
+        private ICoroutineRunner _coroutineRunner;
 
         private Coroutine _attackCoroutine;
 

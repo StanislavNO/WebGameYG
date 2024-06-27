@@ -11,6 +11,7 @@ namespace Assets.Source.Code_base
         private readonly Queue<IEnemy> _enemies;
         private readonly EnemyDeactivator _deactivator;
 
+        [Inject]
         public EnemyPool(EnemyFactory factory, EnemyDeactivator deactivator)
         {
             _factory = factory;
@@ -30,7 +31,7 @@ namespace Assets.Source.Code_base
             IEnemy enemy;
 
             if (_enemies.Count == 0)
-                enemy = _factory.Create();
+                enemy = _factory.Get();
             else
                 enemy = _enemies.Dequeue();
 

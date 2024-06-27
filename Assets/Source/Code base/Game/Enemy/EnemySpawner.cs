@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Assets.Source.Code_base
 {
-    public class EnemySpawner 
+    public class EnemySpawner : IInitializable
     {
         private ICoroutineRunner _coroutineRunner;
         private EnemyPool _pool;
@@ -16,13 +16,9 @@ namespace Assets.Source.Code_base
         private Vector2 _center;
 
         [Inject]
-        private void Construct(ICoroutineRunner coroutineRunner)
+        private void Construct(ICoroutineRunner coroutineRunner, EnemyPool pool, EnemyConfig config)
         {
             _coroutineRunner = coroutineRunner;
-        }
-
-        public void Initialize(EnemyPool pool, EnemyConfig config)
-        {
             _pool = pool;
 
             _coolDown = new(config.SpawnConfig.CoolDown);
@@ -30,7 +26,7 @@ namespace Assets.Source.Code_base
             _center = config.SpawnConfig.Center2D;
         }
 
-        public void Start()
+        public void Initialize()
         {
             _coroutineRunner.StartCoroutine(Spawn());
         }

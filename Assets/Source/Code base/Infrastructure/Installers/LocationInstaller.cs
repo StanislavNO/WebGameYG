@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Assets.Source.Code_base
@@ -14,14 +13,29 @@ namespace Assets.Source.Code_base
 
         public override void InstallBindings()
         {
-            Character character = Container.InstantiatePrefabForComponent<Character>
-                        (_playerPrefab, _characterSpawnPoint.position, Quaternion.identity, null);
+            BindCharacter();
+            BindEnemyTarget();
+        }
 
+        private void BindCharacter()
+        {
+            Character character = Container.InstantiatePrefabForComponent<Character>
+                (_playerPrefab, _characterSpawnPoint.position, Quaternion.identity, null);
+
+            Container.Bind<Character>()
+                .FromInstance(character)
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindEnemyTarget()
+        {
             EnemyTarget enemyTarget = Container.InstantiatePrefabForComponent<EnemyTarget>
                 (_enemyTargetPrefab, _enemyTargetSpawnPoint.position, Quaternion.identity, null);
 
-            Container.BindInterfacesAndSelfTo<Character>().FromInstance(character).AsSingle().NonLazy();
-            Container.Bind<EnemyTarget>().FromInstance(enemyTarget).AsSingle().NonLazy();   
+            Container.Bind<EnemyTarget>()
+                .FromInstance(enemyTarget)
+                .AsSingle();
         }
     }
 }
