@@ -13,8 +13,8 @@ namespace Assets.Source.Code_base
 
         public override void InstallBindings()
         {
-            BindCharacter();
             BindEnemyTarget();
+            BindCharacter();
         }
 
         private void BindCharacter()

@@ -24,8 +24,8 @@ namespace Assets.Source.Code_base
 
         private void BindEnemy()
         {
-            Container.BindInterfacesAndSelfTo<Enemy>().FromInstance(_enemyPrefab).AsSingle();
             Container.Bind<EnemyConfig>().FromInstance(_enemyConfig).AsSingle();
+            Container.BindInterfacesAndSelfTo<Enemy>().FromInstance(_enemyPrefab).AsSingle();
         }
 
         private void BindServices()

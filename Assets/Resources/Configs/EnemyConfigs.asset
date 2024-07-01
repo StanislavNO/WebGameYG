@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: EnemyConfigs
   m_EditorClassIdentifier: 
   <SpawnConfig>k__BackingField:
-    _spawnCenter: {x: 0, y: 0.8, z: -1.54}
     <CoolDown>k__BackingField: 1.66
     <Radius>k__BackingField: 13.42
   <MoveStateConfig>k__BackingField:
     <Speed>k__BackingField: 4
-  <OffsetToTarget>k__BackingField: 2.19
+  <OffsetToTarget>k__BackingField: 1.55
   <WorkCoolDown>k__BackingField: 1.05
