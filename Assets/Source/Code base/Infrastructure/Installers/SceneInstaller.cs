@@ -5,7 +5,7 @@ namespace Assets.Source.Code_base
 {
     public class SceneInstaller : MonoInstaller
     {
-        [SerializeField] private EntryPoint _bootstrap;
+        [SerializeField] private GameEntryPoint _bootstrap;
         [SerializeField] private EnemyConfig _enemyConfig;
         [SerializeField] private Enemy _enemyPrefab;
 
@@ -18,7 +18,7 @@ namespace Assets.Source.Code_base
 
         private void BindEntryPoint()
         {
-            EntryPoint entryPont = Container.InstantiatePrefabForComponent<EntryPoint>(_bootstrap);
+            GameEntryPoint entryPont = Container.InstantiatePrefabForComponent<GameEntryPoint>(_bootstrap);
             Container.Bind<ICoroutineRunner>().FromInstance(entryPont).AsSingle();
         }
 

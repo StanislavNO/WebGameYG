@@ -12,8 +12,8 @@ namespace Assets.Source.Code_base
 
         [SerializeField] private Animator _animator;
 
-        public void StartIdling() => _animator.SetBool(IsIdling, true);
-        public void StopIdling() => _animator.SetBool(IsIdling, false);
+        public void StartIdling() => _animator?.SetBool(IsIdling, true);
+        public void StopIdling() => _animator?.SetBool(IsIdling, false);
 
         public void StartRunning() => _animator.SetBool(IsRunning, true);
         public void StopRunning() => _animator.SetBool(IsRunning, false);

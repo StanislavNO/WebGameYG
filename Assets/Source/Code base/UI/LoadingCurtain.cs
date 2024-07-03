@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Source.Code_base.UI
@@ -10,10 +11,7 @@ namespace Assets.Source.Code_base.UI
 
         private WaitForSeconds _delay;
 
-        private void Awake()
-        {
-            _delay = new(_fadeTime);
-        }
+        private void Awake() => _delay = new(_fadeTime);
 
         public void Show()
         {
@@ -21,10 +19,7 @@ namespace Assets.Source.Code_base.UI
             _curtain.alpha = 1f;
         }
 
-        public void Hide()
-        {
-            StartCoroutine(DoFadeIn());
-        }
+        public void Hide() => StartCoroutine(DoFadeIn());
 
         private IEnumerator DoFadeIn()
         {

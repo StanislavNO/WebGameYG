@@ -6,20 +6,22 @@ namespace Assets.Source.Code_base
     {
         private const int MinCorrectLevel = 1;
 
-        public LevelLoadingData(int level)
+        private int _level;
+
+        public LevelLoadingData(int level = MinCorrectLevel)
         {
-            Level = level;
+            _level = level;
         }
 
         public int Level
         {
-            get { return Level; }
+            get { return _level; }
             set
             {
                 if (value < MinCorrectLevel)
                     throw new ArgumentOutOfRangeException(nameof(value));
 
-                Level = value;
+                _level = value;
             }
         }
     }

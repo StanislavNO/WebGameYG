@@ -1,5 +1,4 @@
 using Assets.Source.Code_base.UI;
-using System;
 using UnityEngine;
 using Zenject;
 
