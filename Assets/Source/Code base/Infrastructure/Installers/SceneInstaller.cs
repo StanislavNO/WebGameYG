@@ -30,11 +30,11 @@ namespace Assets.Source.Code_base
 
         private void BindServices()
         {
-            Container.Bind<PauseHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<EnemyPool>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle();
             Container.Bind<EnemyDeactivator>().AsSingle();
+            
         }
     }
 }

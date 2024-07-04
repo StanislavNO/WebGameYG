@@ -21,6 +21,9 @@ namespace Assets.Source.Code_base
             _currentState.Enter();
         }
 
+        public void Disable() =>
+            _currentState.Exit();
+
         public void SwitchState<T>() where T : IState
         {
             ICharacterState state = _states.FirstOrDefault(state => state is T);

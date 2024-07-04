@@ -24,8 +24,7 @@ namespace Assets.Source.Code_base
 
             Container.Bind<Character>()
                 .FromInstance(character)
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
         }
 
         private void BindEnemyTarget()

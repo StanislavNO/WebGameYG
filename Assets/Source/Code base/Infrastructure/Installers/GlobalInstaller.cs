@@ -14,6 +14,12 @@ namespace Assets.Source.Code_base
             BindSceneLoader();
             BindLoadingCurtain();
             BindResources();
+            BindTimeManager();
+        }
+
+        private void BindTimeManager()
+        {
+            Container.Bind<PauseHandler>().AsSingle();
         }
 
         private void BindResources()

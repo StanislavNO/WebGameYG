@@ -24,6 +24,9 @@ namespace Assets.Source.Code_base
 
         public PlayerInput Input { get; private set; }
 
+        private void OnDestroy() =>
+            _stateMachine.Disable();
+
         private void Update()
         {
             _stateMachine.HandleInput();

@@ -19,16 +19,14 @@ namespace Assets.Source.Code_base
             _handlers.Add(handler);
         }
 
-        public void Remove(IPause handler)
-        {
-            if (_handlers.Contains(handler))
-                _handlers.Remove(handler);
-        }
+        public void Clear() => _handlers.Clear();
 
         public void SetPause(bool isPaused)
         {
             foreach (IPause handler in _handlers)
                 handler.SetPause(isPaused);
+
+            UnityEngine.Debug.Log(_handlers.Count);
         }
     }
 }

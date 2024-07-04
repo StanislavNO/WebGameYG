@@ -33,7 +33,6 @@ namespace Assets.Source.Code_base.UI
 
         private void OnPlayClick()
         {
-            Debug.Log("clic");
             _playButton.gameObject.SetActive(false);
             _pauseButton.gameObject.SetActive(true);
             _pauseHandler.SetPause(false);
