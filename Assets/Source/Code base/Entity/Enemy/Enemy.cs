@@ -4,7 +4,7 @@ using Zenject;
 namespace Assets.Source.Code_base
 {
     [RequireComponent(typeof(DamageHandler))]
-    public class Enemy : MonoBehaviour, IEnemy, IDisable
+    public class Enemy : MonoBehaviour, IEnemy, IDisable, IPause
     {
         [SerializeField] private EnemyView _view;
         [SerializeField] private EnemyConfig _config;
@@ -14,6 +14,8 @@ namespace Assets.Source.Code_base
         private EnemyData _data;
         private EnemyStateMachine _stateMachine;
         private EnemyDeactivator _deactivator;
+
+        private bool _isPaused = false;
 
         [Inject]
         private void Construct(EnemyTarget target, EnemyDeactivator deactivator, ICoroutineRunner coroutineRunner)
@@ -34,8 +36,11 @@ namespace Assets.Source.Code_base
         private void OnDisable() =>
             _deathHandler.DamageDetected -= OnDie;
 
-        private void Update() =>
-            _stateMachine.Update();
+        private void FixedUpdate()
+        {
+            if (_isPaused == false)
+                _stateMachine.Update();
+        }
 
         public void Disable() => _deactivator.Deactivate(this);
 
@@ -44,6 +49,8 @@ namespace Assets.Source.Code_base
             _transform.position = position;
             _data.StartPosition = _transform.position;
         }
+
+        public void SetPause(bool isPaused) => _isPaused = isPaused;
 
         private void OnDie() =>
             _stateMachine.SwitchState<DieState>();

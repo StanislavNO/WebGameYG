@@ -10,9 +10,15 @@ namespace Assets.Source.Code_base
 
         public override void InstallBindings()
         {
-            BindSceneLoader();
             BindInputService();
+            BindSceneLoader();
             BindLoadingCurtain();
+            BindResources();
+        }
+
+        private void BindResources()
+        {
+            Container.BindInterfacesAndSelfTo<Wallet>().AsSingle();
         }
 
         private void BindSceneLoader()
@@ -24,7 +30,7 @@ namespace Assets.Source.Code_base
 
         private void BindInputService()
         {
-            Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle().NonLazy();
         }
 
         private void BindLoadingCurtain()

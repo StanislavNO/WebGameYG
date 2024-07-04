@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Source.Code_base.UI
@@ -15,8 +14,10 @@ namespace Assets.Source.Code_base.UI
 
         public void Show()
         {
+            float fullAlpha = 1f;
+
             gameObject.SetActive(true);
-            _curtain.alpha = 1f;
+            _curtain.alpha = fullAlpha;
         }
 
         public void Hide() => StartCoroutine(DoFadeIn());
