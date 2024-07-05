@@ -8,7 +8,7 @@ namespace Assets.Source.Code_base
 
         public PauseHandler()
         {
-            _handlers = new();
+            _handlers = new List<IPause>();
         }
 
         public void Add(IPause handler)
