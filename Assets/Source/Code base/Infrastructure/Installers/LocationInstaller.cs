@@ -22,7 +22,7 @@ namespace Assets.Source.Code_base
             Character character = Container.InstantiatePrefabForComponent<Character>
                 (_playerPrefab, _characterSpawnPoint.position, Quaternion.identity, null);
 
-            Container.Bind<Character>()
+            Container.Bind<ICharacter>()
                 .FromInstance(character)
                 .AsSingle();
         }

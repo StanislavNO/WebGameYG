@@ -31,10 +31,10 @@ namespace Assets.Source.Code_base
         private void BindServices()
         {
             Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<RewardHandler>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<EnemyPool>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle();
             Container.Bind<EnemyDeactivator>().AsSingle();
-            
         }
     }
 }

@@ -4,7 +4,7 @@ using Zenject;
 namespace Assets.Source.Code_base
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Character : MonoBehaviour, ICoroutineRunner
+    public class Character : MonoBehaviour, ICoroutineRunner, ICharacter
     {
         private CharacterStateMachine _stateMachine;
         private CharacterData _data;
@@ -31,6 +31,13 @@ namespace Assets.Source.Code_base
         {
             _stateMachine.HandleInput();
             _stateMachine.Update();
+        }
+
+        public void SetPosition(Vector3 at)
+        {
+            Controller.enabled = false;
+            transform.position = at;
+            Controller.enabled = true;
         }
     }
 }

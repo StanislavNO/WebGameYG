@@ -2,7 +2,7 @@
 
 namespace Assets.Source.Code_base
 {
-    public class Wallet : IReadOnlyWallet
+    public class Wallet : IReadOnlyWallet, IWallet
     {
         public Wallet(int coin = 0)
         {
@@ -25,12 +25,18 @@ namespace Assets.Source.Code_base
             CoinChanged?.Invoke(Coin);
         }
 
-        public void RemoveCoin(int value)
+        public bool TryRemoveCoin(int value)
         {
             ValidatePositiveValue(value);
 
-            Coin -= value;
-            CoinChanged?.Invoke(Coin);
+            if (IsEnough(value))
+            {
+                Coin -= value;
+                CoinChanged?.Invoke(Coin);
+                return true;
+            }
+
+            return false;
         }
 
         private void ValidatePositiveValue(int value)
