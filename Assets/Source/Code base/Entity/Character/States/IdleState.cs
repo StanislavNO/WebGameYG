@@ -14,7 +14,7 @@ namespace Assets.Source.Code_base
             base.Enter();
 
             Data.Speed = 0;
-            View.StopIdling();
+            View.StartIdling();
         }
 
         public override void Exit()
