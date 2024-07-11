@@ -22,7 +22,7 @@ namespace Assets.Source.Code_base
         private void OnTriggerEnter(Collider other)
         {
             _spawnPoint.ShowSpawn();
-            _character.SetPosition(_spawnPoint.transform.position);
+            _character.Warp(_spawnPoint.transform.position);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Assets.Source.Code_base
             _stateMachine.Update();
         }
 
-        public void SetPosition(Vector3 at)
+        public void Warp(Vector3 at)
         {
             Controller.enabled = false;
             transform.position = at;

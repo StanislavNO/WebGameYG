@@ -44,7 +44,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 79
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -54,12 +54,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.32
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.93, z: 0}
+  m_Center: {x: 0, y: 0.99, z: -0.03}
 --- !u!114 &6305915455200440832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,13 +103,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4400821896571893041}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.55433965, y: 0.7189424, z: 0.33149177, w: -0.25679323}
-  m_LocalPosition: {x: -4.8, y: -4.3, z: -5.2}
+  m_LocalRotation: {x: -0.5576757, y: 0.7663934, z: 0.24634878, w: -0.2023642}
+  m_LocalPosition: {x: -7.9, y: -3.5, z: -1.4}
   m_LocalScale: {x: 99.99998, y: 99.99998, z: 99.99998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6112758614069618395}
-  m_LocalEulerAnglesHint: {x: -11.066, y: -131.348, z: -80.283}
+  m_LocalEulerAnglesHint: {x: -8.737, y: -143.714, z: -74.952}
 --- !u!33 &4400821896570861411
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -224,8 +224,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8005392767081452337}
-  - component: {fileID: 9169611933664710894}
   - component: {fileID: 4253586378812595340}
+  - component: {fileID: 8546403907311164922}
   m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
@@ -248,27 +248,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5958420580336007574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &9169611933664710894
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6877321182553319064}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.1905141
-  m_Center: {x: 0.0024267978, y: 0, z: 0.035444126}
 --- !u!114 &4253586378812595340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +260,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053351c3be419274b9fb43ec8156eb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 9169611933664710894}
+  _collider: {fileID: 8546403907311164922}
+--- !u!65 &8546403907311164922
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877321182553319064}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 191
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9150831, y: 1.3714311, z: 1.77}
+  m_Center: {x: 0.010615555, y: 0.08571501, z: 0.37000003}
 --- !u!1001 &6112758614069564931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315,6 +315,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 126842, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 131490, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -444,6 +448,8 @@ PrefabInstance:
     - {fileID: 140312, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
     - {fileID: 110010, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
     - {fileID: 183722, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
+    - {fileID: 124496, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
+    - {fileID: 178246, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 487640, guid: 32a02de6a6cf2194798f0e6e0e1c82ea, type: 3}
       insertIndex: -1

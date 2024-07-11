@@ -6,7 +6,7 @@ namespace Assets.Source.Code_base
     public class CharacterData
     {
         private Vector3 _gravity = Physics.gravity;
-        private float _speed;
+        private float _speed = 0;
 
         public Vector3 Direction { get; private set; }
 

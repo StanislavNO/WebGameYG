@@ -28,25 +28,26 @@ namespace Assets.Source.Code_base
         public void Enter()
         {
             _view.StartAttacking();
-            _attackCoroutine = _coroutineRunner.StartCoroutine(Attack());
+            _view.EndAttacking += OnStopAttacking;
+            Attack();
         }
 
         public void Exit()
         {
-            _view.StopAttacking();
-            _coroutineRunner.StopCoroutine(_attackCoroutine);
+            _view.EndAttacking -= OnStopAttacking;
+            //_view.StopAttacking();
+            //_coroutineRunner.StopCoroutine(_attackCoroutine);
         }
 
         public void HandleInput(){}
 
         public void Update(){}
 
-        private IEnumerator Attack()
-        {
+        private void Attack() =>
             _attackPoint.gameObject.SetActive(true);
 
-            yield return _delay;
-
+        private void OnStopAttacking()
+        {
             _attackPoint.gameObject.SetActive(false);
             _stateSwitcher.SwitchState<IdleState>();
         }
