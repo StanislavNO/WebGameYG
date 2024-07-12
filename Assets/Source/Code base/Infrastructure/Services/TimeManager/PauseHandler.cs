@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Zenject;
 
 namespace Assets.Source.Code_base
 {
@@ -8,7 +9,7 @@ namespace Assets.Source.Code_base
 
         public PauseHandler()
         {
-            _handlers = new List<IPause>();
+            _handlers = new();
         }
 
         public void Add(IPause handler)
@@ -25,8 +26,6 @@ namespace Assets.Source.Code_base
         {
             foreach (IPause handler in _handlers)
                 handler.SetPause(isPaused);
-
-            UnityEngine.Debug.Log(_handlers.Count);
         }
     }
 }

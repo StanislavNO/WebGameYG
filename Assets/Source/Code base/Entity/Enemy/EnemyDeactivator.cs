@@ -7,11 +7,13 @@ namespace Assets.Source.Code_base
         public event Action<IEnemy> EnemyDeactivated;
         public event Action EnemyDied;
 
-        public void Deactivate(Enemy enemy)
+        public void Deactivate(Enemy enemy, bool isDied = false)
         {
             enemy.gameObject.SetActive(false);
             EnemyDeactivated?.Invoke(enemy);
-            EnemyDied?.Invoke();
+
+            if (isDied)
+                EnemyDied?.Invoke();
         }
     }
 }

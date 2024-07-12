@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5025844828317728475}
   - component: {fileID: 188208254963733370}
   m_Layer: 0
-  m_Name: Bootstrap
+  m_Name: GameLooper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89dbafc727ac9f489c28a51ab21134b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 3657330181620006648, guid: a95712e2f9a3ace4fbb7c5319ef64853, type: 3}
-  _enemyConfig: {fileID: 11400000, guid: 498398af070bc6642a4d5f6e7ffdfd6a, type: 2}
-  _enemySpawner: {fileID: 0}
+  _secondToGame: 0

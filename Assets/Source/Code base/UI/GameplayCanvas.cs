@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Assets.Source.Code_base.UI
 {
-    public class GameplayHUD : MonoBehaviour
+    public class GameplayCanvas : MonoBehaviour
     {
         [SerializeField] private Button _startMenuButton;
 

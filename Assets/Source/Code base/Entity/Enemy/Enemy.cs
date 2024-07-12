@@ -4,7 +4,7 @@ using Zenject;
 namespace Assets.Source.Code_base
 {
     [RequireComponent(typeof(DamageHandler))]
-    public class Enemy : MonoBehaviour, IEnemy, IDisable, IPause
+    public class Enemy : MonoBehaviour, IEnemy, IEnemyDisable, IPause
     {
         [SerializeField] private EnemyView _view;
         [SerializeField] private EnemyConfig _config;
@@ -42,7 +42,7 @@ namespace Assets.Source.Code_base
                 _stateMachine.Update();
         }
 
-        public void Disable() => _deactivator.Deactivate(this);
+        public void Disable(bool isDie) => _deactivator.Deactivate(this, isDie);
 
         public void SetPosition(Vector3 position)
         {

@@ -1,8 +1,9 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
 
 namespace Assets.Source.Code_base
 {
-    public class RewardHandler : IDisable
+    public class RewardHandler : IDisposable
     {
         private const int Reward = 10;
 
@@ -18,7 +19,8 @@ namespace Assets.Source.Code_base
             _enemyDeactivator.EnemyDied += AddCoin;
         }
 
-        public void Disable() =>
+
+        public void Dispose() =>
             _enemyDeactivator.EnemyDied -= AddCoin;
 
         private void AddCoin() => _wallet.AddCoin(Reward);

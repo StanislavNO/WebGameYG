@@ -19,7 +19,7 @@ namespace Assets.Source.Code_base
 
         private void Awake() => _collider.isTrigger = true;
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider _)
         {
             _spawnPoint.ShowSpawn();
             _character.Warp(_spawnPoint.transform.position);

@@ -2,14 +2,14 @@
 {
     public class DisableState : IState
     {
-        private readonly IDisable _enemy;
+        private readonly IEnemyDisable _enemy;
 
-        public DisableState(IDisable enemy)
+        public DisableState(IEnemyDisable enemy)
         {
             _enemy = enemy;
         }
 
-        public void Enter() => _enemy.Disable();
+        public void Enter() => _enemy.Disable(false);
 
         public void Exit() { }
 
