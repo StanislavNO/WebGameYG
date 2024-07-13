@@ -60,7 +60,7 @@ namespace Assets.Source.Code_base
 
         private void RotationPlayer()
         {
-            float lerpAmount = 0.05f;
+            float lerpAmount = 0.2f;
             Vector3 direction = Data.Direction;
             direction.y = 0;
 
@@ -71,7 +71,9 @@ namespace Assets.Source.Code_base
         private Vector2 ReadInput() =>
             Input.Player.Move.ReadValue<Vector2>();
 
-        private void OnAttackPressed(InputAction.CallbackContext _) =>
+        private void OnAttackPressed(InputAction.CallbackContext _)
+        {
             StateSwitcher.SwitchState<AttackState>();
+        }
     }
 }
