@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
-
 namespace Assets.Source.Code_base
 {
     public class AttackState : ICharacterState
@@ -15,7 +13,7 @@ namespace Assets.Source.Code_base
 
         private Coroutine _attackCoroutine;
 
-        public AttackState(IStateSwitcher stateSwitcher, Character character) 
+        public AttackState(IStateSwitcher stateSwitcher, Character character)
         {
             _stateSwitcher = stateSwitcher;
             _attackPoint = character.AttackPoint;
@@ -29,21 +27,20 @@ namespace Assets.Source.Code_base
         {
             _view.StartAttacking();
             _view.EndAttacking += OnStopAttacking;
-            Attack();
+            _view.Attacking += OnAttack;
         }
 
         public void Exit()
         {
             _view.EndAttacking -= OnStopAttacking;
-            //_view.StopAttacking();
-            //_coroutineRunner.StopCoroutine(_attackCoroutine);
+            _view.Attacking -= OnAttack;
         }
 
-        public void HandleInput(){}
+        public void HandleInput() { }
 
-        public void Update(){}
+        public void Update() { }
 
-        private void Attack() =>
+        private void OnAttack() =>
             _attackPoint.gameObject.SetActive(true);
 
         private void OnStopAttacking()
