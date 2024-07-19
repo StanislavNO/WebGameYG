@@ -3,7 +3,6 @@ using Zenject;
 
 namespace Assets.Source.Code_base
 {
-    [RequireComponent(typeof(DamageHandler))]
     public class Enemy : MonoBehaviour, IEnemy, IEnemyDisable, IPause
     {
         [SerializeField] private EnemyView _view;
@@ -30,6 +29,7 @@ namespace Assets.Source.Code_base
             if (_stateMachine != null)
                 _stateMachine.Reset();
 
+            _deathHandler.IsWork = true;
             _deathHandler.DamageDetected += OnDie;
         }
 
@@ -52,7 +52,10 @@ namespace Assets.Source.Code_base
 
         public void SetPause(bool isPaused) => _isPaused = isPaused;
 
-        private void OnDie() =>
+        private void OnDie()
+        {
+            _deathHandler.IsWork = false;
             _stateMachine.SwitchState<DieState>();
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Assets.Source.Code_base
+﻿using UnityEngine;
+
+namespace Assets.Source.Code_base
 {
     public abstract class EnemyState : IState
     {

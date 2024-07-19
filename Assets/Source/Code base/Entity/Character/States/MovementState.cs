@@ -60,7 +60,7 @@ namespace Assets.Source.Code_base
 
         private void RotationPlayer()
         {
-            float lerpAmount = 0.2f;
+            float lerpAmount = 0.05f;
             Vector3 direction = Data.Direction;
             direction.y = 0;
 

@@ -27,7 +27,7 @@ namespace Assets.Source.Code_base
         private void OnDestroy() =>
             _stateMachine.Disable();
 
-        private void FixedUpdate()
+        private void Update()
         {
             _stateMachine.HandleInput();
             _stateMachine.Update();

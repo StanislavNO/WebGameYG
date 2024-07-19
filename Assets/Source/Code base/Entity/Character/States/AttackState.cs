@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
 namespace Assets.Source.Code_base
 {
     public class AttackState : ICharacterState
@@ -12,12 +11,14 @@ namespace Assets.Source.Code_base
         private ICoroutineRunner _coroutineRunner;
 
         private Coroutine _attackCoroutine;
+        private PlayerInput _playerInput;
 
         public AttackState(IStateSwitcher stateSwitcher, Character character)
         {
             _stateSwitcher = stateSwitcher;
             _attackPoint = character.AttackPoint;
             _view = character.View;
+            _playerInput = character.Input;
 
             _delay = new(character.Config.AttackStateConfig.CoolDown);
             _coroutineRunner = character;
@@ -25,6 +26,8 @@ namespace Assets.Source.Code_base
 
         public void Enter()
         {
+            _playerInput.Player.Attack.Disable();
+
             _view.StartAttacking();
             _view.EndAttacking += OnStopAttacking;
             _view.Attacking += OnAttack;
@@ -32,6 +35,8 @@ namespace Assets.Source.Code_base
 
         public void Exit()
         {
+            _playerInput.Player.Attack.Enable();
+
             _view.EndAttacking -= OnStopAttacking;
             _view.Attacking -= OnAttack;
         }

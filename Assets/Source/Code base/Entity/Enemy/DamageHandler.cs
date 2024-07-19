@@ -8,9 +8,11 @@ namespace Assets.Source.Code_base
     {
         public event Action DamageDetected;
 
+        public bool IsWork { get; set; }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<AttackPoint>(out _))
+            if (other.TryGetComponent<AttackPoint>(out _) && IsWork)
                 DamageDetected?.Invoke();
         }
     }

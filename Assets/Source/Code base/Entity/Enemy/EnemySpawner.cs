@@ -35,8 +35,7 @@ namespace Assets.Source.Code_base
         public void Initialize() =>
             _coroutineRunner.StartCoroutine(Spawn());
 
-        public void SetPause(bool isPaused) =>
-            _isPaused = isPaused;
+        public void SetPause(bool isPaused) => _isPaused = isPaused;
 
         private IEnumerator Spawn()
         {

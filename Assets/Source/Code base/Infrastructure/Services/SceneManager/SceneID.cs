@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
-
-namespace Assets.Source.Code_base
+﻿namespace Assets.Source.Code_base
 {
-    //порядок не менять
-    public enum SceneID 
+    public enum SceneID
     {
         Bootstrap = 0,
         Menu,

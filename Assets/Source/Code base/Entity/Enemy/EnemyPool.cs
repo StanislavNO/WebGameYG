@@ -21,10 +21,8 @@ namespace Assets.Source.Code_base
             _deactivator.EnemyDeactivated += OnPutEnemy;
         }
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             _deactivator.EnemyDeactivated -= OnPutEnemy;
-        }
 
         public IEnemy GetEnemy()
         {

@@ -11,6 +11,8 @@ namespace Assets.Source.Code_base
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly WaitForSeconds _delay;
 
+        private Coroutine _coroutine;
+
         public WorkState(IStateSwitcher switcher, EnemyView view, EnemyData enemyData, ICoroutineRunner coroutineRunner, EnemyConfig config) : base(switcher, view)
         {
             _enemyData = enemyData;
@@ -24,14 +26,16 @@ namespace Assets.Source.Code_base
             base.Enter();
 
             _view.StartWork();
-            _coroutineRunner.StartCoroutine(DelayAndSwitch());
+            _coroutine = _coroutineRunner.StartCoroutine(DelayAndSwitch());
         }
 
         public override void Exit()
         {
             base.Exit();
 
+            _view.StopWork();
             _enemyData.IsMovingToWork = false;
+            _coroutineRunner.StopCoroutine(_coroutine);
         }
 
         private IEnumerator DelayAndSwitch()

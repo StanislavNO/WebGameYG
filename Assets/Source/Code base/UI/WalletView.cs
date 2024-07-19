@@ -18,14 +18,14 @@ namespace Assets.Source.Code_base.UI
 
         private void OnEnable()
         {
-            ReadCoins(_wallet.Coin);
-            _wallet.CoinChanged += ReadCoins;
+            WriteCoins(_wallet.Coin);
+            _wallet.CoinChanged += WriteCoins;
         }
 
         private void OnDisable() =>
-            _wallet.CoinChanged -= ReadCoins;
+            _wallet.CoinChanged -= WriteCoins;
 
-        private void ReadCoins(int value) =>
+        private void WriteCoins(int value) =>
             _text.text = value.ToString();
     }
 }

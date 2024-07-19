@@ -2,12 +2,10 @@
 {
     public class DieState : EnemyState
     {
-        private readonly EnemyView _view;
         private readonly IEnemyDisable _enemy;
 
         public DieState(IStateSwitcher switcher,IEnemyDisable enemy, EnemyView view) : base(switcher, view)
         {
-            _view = view;
             _enemy = enemy;
         }
 
@@ -15,14 +13,22 @@
         {
             base.Enter();
 
-            _view.StartDie();
-
-            _enemy.Disable(true);
+            View.DieAnimationCanceled += OnDieCanceled;
+            View.StartDie();
         }
 
         public override void Exit()
         {
             base.Exit();
+
+            View.DieAnimationCanceled -= OnDieCanceled;
+            View.StopDie();
+        }
+
+        private void OnDieCanceled()
+        {
+            _enemy.Disable(true);
+            Switcher.SwitchState<NullState>();
         }
     }
 }

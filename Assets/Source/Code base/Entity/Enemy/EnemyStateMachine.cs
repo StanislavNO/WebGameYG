@@ -18,7 +18,8 @@ namespace Assets.Source.Code_base
                 new MoveState(this, enemyView, data, enemyTransform, config),
                 new WorkState(this, enemyView, data, coroutineRunner, config),
                 new DieState(this,enemy, enemyView),
-                new DisableState(enemy)
+                new DisableState(enemy),
+                new NullState()
             };
         }
 

@@ -8,5 +8,6 @@ namespace Assets.Source.Code_base
     {
         [field: SerializeField] public float CoolDown { get; private set; }
         [field: SerializeField] public float Radius { get; private set; }
+        [field: SerializeField] public int Quantity { get; private set; }
     }
 }
