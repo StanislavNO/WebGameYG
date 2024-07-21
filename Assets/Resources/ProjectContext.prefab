@@ -54,7 +54,7 @@ MonoBehaviour:
   _buildsReflectionBakingCoverageMode: 0
   _settings:
     _ensureDeterministicDestructionOrderOnApplicationQuit: 0
-    _displayWarningWhenResolvingDuringInstall: 1
+    _displayWarningWhenResolvingDuringInstall: 0
     _validationRootResolveMethod: 0
     _validationErrorResponse: 0
     _signalSettings:
@@ -74,3 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869e2292bde9b2b4f994fc483b4a6fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefabHUD: {fileID: 1288688037573956034, guid: 431652a626906254b841271cf390b8e4, type: 3}
