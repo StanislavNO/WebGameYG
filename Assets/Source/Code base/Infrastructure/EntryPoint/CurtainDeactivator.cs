@@ -14,7 +14,7 @@ namespace Assets.Source.Code_base
             _loadingCurtain = loadingCurtain;
         }
 
-        private void Start()
+        private void Awake()
         {
             if (_loadingCurtain.enabled)
                 _loadingCurtain.Hide();

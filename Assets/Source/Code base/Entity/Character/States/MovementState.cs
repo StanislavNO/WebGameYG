@@ -44,11 +44,15 @@ namespace Assets.Source.Code_base
         protected bool IsInputZero() =>
             ReadInput() == Vector2.zero;
 
-        protected virtual void AddInputActionsCallbacks() =>
+        protected virtual void AddInputActionsCallbacks()
+        {
             Input.Player.Attack.started += OnAttackPressed;
+        }
 
-        protected virtual void RemoveInputActionsCallbacks() =>
+        protected virtual void RemoveInputActionsCallbacks()
+        {
             Input.Player.Attack.started -= OnAttackPressed;
+        }
 
         private void MovePlayer()
         {
@@ -71,9 +75,13 @@ namespace Assets.Source.Code_base
         private Vector2 ReadInput() =>
             Input.Player.Move.ReadValue<Vector2>();
 
-        private void OnAttackPressed(InputAction.CallbackContext _)
+        private void OnAttackPressed(InputAction.CallbackContext context)
         {
-            StateSwitcher.SwitchState<AttackState>();
+            if (context.started)
+            {
+                Debug.Log("OnAttackPressed" + " " + context.phase);
+                StateSwitcher.SwitchState<AttackState>();
+            }
         }
     }
 }

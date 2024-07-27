@@ -3,42 +3,45 @@ namespace Assets.Source.Code_base
 {
     public class AttackState : ICharacterState
     {
-        private readonly IStateSwitcher _stateSwitcher;
-        private readonly AttackPoint _attackPoint;
         private readonly CharacterView _view;
+        private readonly AttackPoint _attackPoint;
+        private readonly IStateSwitcher _stateSwitcher;
 
-        private readonly WaitForSeconds _delay;
-        private ICoroutineRunner _coroutineRunner;
-
-        private Coroutine _attackCoroutine;
-        private PlayerInput _playerInput;
+        private bool _isAttacking;
 
         public AttackState(IStateSwitcher stateSwitcher, Character character)
         {
-            _stateSwitcher = stateSwitcher;
-            _attackPoint = character.AttackPoint;
             _view = character.View;
-            _playerInput = character.Input;
+            _attackPoint = character.AttackPoint;
+            _stateSwitcher = stateSwitcher;
 
-            _delay = new(character.Config.AttackStateConfig.CoolDown);
-            _coroutineRunner = character;
+            _isAttacking = false;
         }
 
         public void Enter()
         {
-            _playerInput.Player.Attack.Disable();
+            Debug.Log("Enter" + _isAttacking);
+            if (_isAttacking == false)
+            {
+                _isAttacking = true;
 
-            _view.StartAttacking();
-            _view.EndAttacking += OnStopAttacking;
-            _view.Attacking += OnAttack;
+                _view.StartAttacking();
+                _view.EndAttacking += OnStopAttacking;
+                _view.Attacking += OnAttack;
+            }
         }
 
         public void Exit()
         {
-            _playerInput.Player.Attack.Enable();
+            Debug.Log("Exit" + _isAttacking);
 
-            _view.EndAttacking -= OnStopAttacking;
-            _view.Attacking -= OnAttack;
+            if (_isAttacking)
+            {
+                _isAttacking = false;
+
+                _view.EndAttacking -= OnStopAttacking;
+                _view.Attacking -= OnAttack;
+            }
         }
 
         public void HandleInput() { }
@@ -50,6 +53,7 @@ namespace Assets.Source.Code_base
 
         private void OnStopAttacking()
         {
+            Debug.Log("OnStopAttacking");
             _attackPoint.gameObject.SetActive(false);
             _stateSwitcher.SwitchState<IdleState>();
         }

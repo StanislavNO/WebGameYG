@@ -31,13 +31,13 @@ namespace Assets.Source.Code_base
             StartCoroutine(EnableInput());
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _timer.TimeCanceled -= OnGameOver;
             _input.Disable();
-        }
 
-        private void OnDestroy() => _pauseHandler.Clear();
+            _pauseHandler.Clear();
+        }
 
         private void Start() => _timer.Start();
 
