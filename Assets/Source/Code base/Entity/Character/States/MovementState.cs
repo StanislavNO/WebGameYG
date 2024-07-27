@@ -78,10 +78,7 @@ namespace Assets.Source.Code_base
         private void OnAttackPressed(InputAction.CallbackContext context)
         {
             if (context.started)
-            {
-                Debug.Log("OnAttackPressed" + " " + context.phase);
                 StateSwitcher.SwitchState<AttackState>();
-            }
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-namespace Assets.Source.Code_base
+﻿namespace Assets.Source.Code_base
 {
     public class AttackState : ICharacterState
     {
@@ -20,7 +19,6 @@ namespace Assets.Source.Code_base
 
         public void Enter()
         {
-            Debug.Log("Enter" + _isAttacking);
             if (_isAttacking == false)
             {
                 _isAttacking = true;
@@ -33,8 +31,6 @@ namespace Assets.Source.Code_base
 
         public void Exit()
         {
-            Debug.Log("Exit" + _isAttacking);
-
             if (_isAttacking)
             {
                 _isAttacking = false;
@@ -53,7 +49,6 @@ namespace Assets.Source.Code_base
 
         private void OnStopAttacking()
         {
-            Debug.Log("OnStopAttacking");
             _attackPoint.gameObject.SetActive(false);
             _stateSwitcher.SwitchState<IdleState>();
         }
